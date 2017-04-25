@@ -2,6 +2,11 @@
  * This module creates an [AWS ELB HTTPS](https://www.terraform.io/docs/providers/aws/r/elb.html)
  */
 
+variable "health_check_target" {
+    default = "HTTP:8000/"
+    description = "The target of the health check"
+}
+
 variable "instances" {
     type = "list"
     description = "A list of instance ids to place in the ELB pool"
@@ -50,7 +55,7 @@ resource "aws_elb" "mod" {
         healthy_threshold   = 2
         unhealthy_threshold = 2
         timeout             = 3
-        target              = "HTTP:${var.listener_instance_port}/ping"
+        target              = "${var.health_check_target}"
         interval            = 30
     }
 
