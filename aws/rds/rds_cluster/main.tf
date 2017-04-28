@@ -3,7 +3,7 @@
  */
 
 variable "database_name" {
-    description = " The name for your database of up to 8 alpha-numeric characters. If you do not provide a name, Amazon RDS will not create a database in the DB cluster you are creating"
+    description = "The name for your database of up to 8 alpha-numeric characters. If you do not provide a name, Amazon RDS will not create a database in the DB cluster you are creating"
 }
 
 variable "db_subnet_group_name" {

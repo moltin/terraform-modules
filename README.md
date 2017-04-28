@@ -47,7 +47,7 @@ This module creates an [AWS EC2 Instance](https://www.terraform.io/docs/provider
 | root_volume_size | Default instance root volume size, bump to 16GB from the default 8GB | `16` | no |
 | subnet_ids | A list of VPC subnet IDs to launch in | - | yes |
 | tags | A map of tags to assign to the resource, `Name` and `Terraform` will be added by default | `<map>` | no |
-| user_data | The user data to provide when launching the instance | - | yes |
+| user_data | The user data to provide when launching the instance | `` | no |
 | vpc_security_group_ids | A list of security group IDs to associate with | - | yes |
 
 ## Outputs

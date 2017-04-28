@@ -58,6 +58,7 @@ variable "tags" {
 }
 
 variable "user_data" {
+    default = ""
     description = "The user data to provide when launching the instance"
 }
 
