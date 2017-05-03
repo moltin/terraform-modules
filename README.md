@@ -17,6 +17,7 @@ This project has been highly inspired by the work of others that have decided to
 	* [Private Subnet](#private-subnet)
 	* [Public Subnet](#public-subnet)
 	* [Security Group - ELB HTTPS](#security-group---elb-https)
+	* [Security Group - Internal](#security-group---internal)
 	* [Security Group - Rancher](#security-group---rancher)
 	* [Security Group - RDS Cluster Instance](#security-group---rds-cluster-instance)
 	* [Security Group - SSH](#security-group---ssh)
@@ -187,6 +188,25 @@ Ports:
 | Name | Description | Default | Required |
 |------|-------------|:-----:|:-----:|
 | name | The security group name, will follow the format [name]-sg-elb-https, e.g. moltin-sg-elb-https | - | yes |
+| tags | A map of tags to assign to the resource, `Name` and `Terraform` will be added by default | `<map>` | no |
+| vpc_id | The id of the VPC that the desired subnet belongs to | - | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| id | The id of the specific security group to retrieve |
+
+## Security Group - Internal
+
+This modules create an [AWS Security Group](https://www.terraform.io/docs/providers/aws/d/security_group.html) to enable internal comms between resources that share this sg
+
+
+## Inputs
+
+| Name | Description | Default | Required |
+|------|-------------|:-----:|:-----:|
+| name | The security group name, will follow the format [name]-sg-internal-[03d], e.g. moltin-sg-internal-001 | - | yes |
 | tags | A map of tags to assign to the resource, `Name` and `Terraform` will be added by default | `<map>` | no |
 | vpc_id | The id of the VPC that the desired subnet belongs to | - | yes |
 
