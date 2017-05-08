@@ -67,17 +67,23 @@ variable "vpc_security_group_ids" {
     description = "A list of security group IDs to associate with"
 }
 
+variable "associate_public_ip_address" {
+    default = false
+    description = "Associate a public ip address with an instance in a VPC"
+}
+
 resource "aws_instance" "mod" {
     count = "${var.instance_count}"
 
-    ami                    = "${var.ami}"
-    ebs_optimized          = "${var.ebs_optimized}"
-    instance_type          = "${var.instance_type}"
-    key_name               = "${aws_key_pair.mod.key_name}"
-    monitoring             = "${var.monitoring}"
-    subnet_id              = "${element(sort(var.subnet_ids), count.index)}"
-    user_data              = "${var.user_data}"
-    vpc_security_group_ids = ["${var.vpc_security_group_ids}"]
+    ami                         = "${var.ami}"
+    ebs_optimized               = "${var.ebs_optimized}"
+    instance_type               = "${var.instance_type}"
+    key_name                    = "${aws_key_pair.mod.key_name}"
+    monitoring                  = "${var.monitoring}"
+    subnet_id                   = "${element(sort(var.subnet_ids), count.index)}"
+    user_data                   = "${var.user_data}"
+    vpc_security_group_ids      = ["${var.vpc_security_group_ids}"]
+    associate_public_ip_address = "${var.associate_public_ip_address}"
 
     root_block_device {
         volume_size           = "${var.root_volume_size}"
