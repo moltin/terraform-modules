@@ -45,9 +45,9 @@ resource "aws_elb" "mod" {
 
     listener {
         instance_port      = "${var.listener_instance_port}"
-        instance_protocol  = "tcp"
+        instance_protocol  = "http"
         lb_port            = 443
-        lb_protocol        = "ssl"
+        lb_protocol        = "https"
         ssl_certificate_id = "${var.ssl_certificate_id}"
     }
 

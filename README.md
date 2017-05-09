@@ -10,8 +10,8 @@ This project has been highly inspired by the work of others that have decided to
 
 * Compute
 	* [EC2 Instance](#ec2-instance)
-* Networking
 	* [ELB HTTPS](#elb-https)
+* Networking
 	* [Internet Gateway](#internet-gateway)
 	* [NAT Gateway](#nat-gateway)
 	* [Private Subnet](#private-subnet)
