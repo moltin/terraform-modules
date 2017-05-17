@@ -1,5 +1,8 @@
 /**
- * This module creates an [AWS EC2 Instance](https://www.terraform.io/docs/providers/aws/r/instance.html) and an [AWS Key Pair](https://www.terraform.io/docs/providers/aws/r/key_pair.html) that will be used by the instance.
+ * This module creates:
+ *
+ * - [AWS EC2 Instance](https://www.terraform.io/docs/providers/aws/r/instance.html)
+ * - [AWS Key Pair](https://www.terraform.io/docs/providers/aws/r/key_pair.html) if needed, that will be used by the instance
  */
 
 variable "ami" {
@@ -29,8 +32,12 @@ variable "key_name" {
     description = "The name of the SSH key to use on the instance, e.g. moltin"
 }
 
+// The path of the public SSH key to use on the instance, e.g. ~/.ssh/id_rsa.pub
+//
+// As a special case, a value of empty string disables the creation of a new key,
+// which is the default value
 variable "key_path" {
-    description = "The path of the public SSH key to use on the instance, e.g. ~/.ssh/id_rsa.pub"
+    default = ""
 }
 
 variable "monitoring" {
@@ -78,7 +85,7 @@ resource "aws_instance" "mod" {
     ami                         = "${var.ami}"
     ebs_optimized               = "${var.ebs_optimized}"
     instance_type               = "${var.instance_type}"
-    key_name                    = "${aws_key_pair.mod.key_name}"
+    key_name                    = "${var.key_name}"
     monitoring                  = "${var.monitoring}"
     subnet_id                   = "${element(sort(var.subnet_ids), count.index)}"
     user_data                   = "${var.user_data}"
@@ -90,10 +97,14 @@ resource "aws_instance" "mod" {
         delete_on_termination = "${var.delete_on_termination}"
     }
 
+    depends_on =["aws_key_pair.mod"]
+
     tags = "${merge(var.tags, map("Name", format("%s-ec2-instance-%03d", var.name, count.index)), map("Terraform", "true"))}"
 }
 
 resource "aws_key_pair" "mod" {
+    count      = "${length(var.key_path) > 0 ? 1 : 0}"
+
     key_name   = "${var.key_name}"
     public_key = "${file("${var.key_path}")}"
 }
