@@ -6,6 +6,14 @@ This project contain a group of base [Terraform](http://terraform.io) modules th
 
 This project has been highly inspired by the work of others that have decided to share with the community their work, check the [resources](#resources) section for more info.
 
+## Index
+
+- [Available Modules](#available-modules)
+- [Changelog](CHANGELOG.md)
+- [Authors](#authors)
+- [License](#license)
+- [Resources](#resources)
+
 ## Available Modules
 
 * Compute
@@ -64,8 +72,8 @@ This module creates:
 |------|-------------|
 | ids | A list of instance IDs |
 | key_name | The name for the key pair |
-| private_ip | Private IP address to associate with the instance in a VPC |
-| public_ip | The public IP address assigned to the instance |
+| private_ips | Private IP addresses to associate with the instances in a VPC |
+| public_ips | The public IP addresses assigned to the instances |
 
 ## ELB HTTPS
 
@@ -414,17 +422,17 @@ This modules create an [AWS RDS Cluster Instance](https://www.terraform.io/docs/
 | tags | A map of tags to assign to the resource, `Name` and `Terraform` will be added by default | `<map>` | no |
 
 
-# Authors
+## Authors
 
 * **Israel Sotomayor** - *Initial work* - [zot24](https://github.com/zot24)
 
 See also the list of [contributors](https://github.com/moltin/terraform-modules/contributors) who participated in this project.
 
-# License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/moltin/terraform-modules/blob/master/LICENSE) file for details
 
-# Resources
+## Resources
 
 - Articles
   - [The Segment AWS Stack](https://segment.com/blog/the-segment-aws-stack/)

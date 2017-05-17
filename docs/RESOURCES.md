@@ -1,4 +1,4 @@
-# Resources
+## Resources
 
 - Articles
   - [The Segment AWS Stack](https://segment.com/blog/the-segment-aws-stack/)

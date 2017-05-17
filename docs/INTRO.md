@@ -3,3 +3,11 @@ This project contain a group of base [Terraform](http://terraform.io) modules th
 > Note: If you are looking for a more complex combination of resources and modules we built as well [terraform-stack](https://github.com/moltin/terraform-stack) it will give you a stack of resources to speed up the process of creating a new infrastructure.
 
 This project has been highly inspired by the work of others that have decided to share with the community their work, check the [resources](#resources) section for more info.
+
+## Index
+
+- [Available Modules](#available-modules)
+- [Changelog](CHANGELOG.md)
+- [Authors](#authors)
+- [License](#license)
+- [Resources](#resources)
