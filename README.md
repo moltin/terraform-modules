@@ -29,7 +29,10 @@ This project has been highly inspired by the work of others that have decided to
 
 ## EC2 Instance
 
-This module creates an [AWS EC2 Instance](https://www.terraform.io/docs/providers/aws/r/instance.html) and an [AWS Key Pair](https://www.terraform.io/docs/providers/aws/r/key_pair.html) that will be used by the instance.
+This module creates:
+
+- [AWS EC2 Instance](https://www.terraform.io/docs/providers/aws/r/instance.html)
+- [AWS Key Pair](https://www.terraform.io/docs/providers/aws/r/key_pair.html) if needed, that will be used by the instance
 
 
 ## Inputs
@@ -43,7 +46,7 @@ This module creates an [AWS EC2 Instance](https://www.terraform.io/docs/provider
 | instance_count | The number of instances to create | `1` | no |
 | instance_type | The type of instance to start | - | yes |
 | key_name | The name of the SSH key to use on the instance, e.g. moltin | - | yes |
-| key_path | The path of the public SSH key to use on the instance, e.g. ~/.ssh/id_rsa.pub | - | yes |
+| key_path | The path of the public SSH key to use on the instance, e.g. ~/.ssh/id_rsa.pub<br><br>As a special case, a value of empty string disables the creation of a new key, which is the default value | `` | no |
 | monitoring | Enable detailed monitoring | `false` | no |
 | name | The instace name, will follow the format [name]-ec2-instance-[03d], e.g. moltin-ec2-instance-001 | - | yes |
 | root_volume_size | Default instance root volume size, bump to 16GB from the default 8GB | `16` | no |
@@ -57,6 +60,9 @@ This module creates an [AWS EC2 Instance](https://www.terraform.io/docs/provider
 | Name | Description |
 |------|-------------|
 | ids | A list of instance IDs |
+| key_name | The name for the key pair |
+| private_ip | Private IP address to associate with the instance in a VPC |
+| public_ip | The public IP address assigned to the instance |
 
 ## ELB HTTPS
 

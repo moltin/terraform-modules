@@ -111,3 +111,12 @@ resource "aws_key_pair" "mod" {
 
 // A list of instance IDs
 output "ids" { value = [ "${aws_instance.mod.*.id}" ] }
+
+// The name for the key pair
+output "key_name" { value = "${aws_key_pair.mod.key_name}"}
+
+// Private IP address to associate with the instance in a VPC
+output "private_ip" { value = "${aws_instance.mod.private_ip}" }
+
+// The public IP address assigned to the instance
+output "public_ip"  { value = "${aws_instance.mod.public_ip}" }
