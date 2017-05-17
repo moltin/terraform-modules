@@ -11,6 +11,9 @@ This project has been highly inspired by the work of others that have decided to
 * Compute
 	* [EC2 Instance](#ec2-instance)
 	* [ELB HTTPS](#elb-https)
+* Data
+	* [Rancheros AMI](#rancheros-ami)
+	* [Ubuntu AMI](#ubuntu-ami)
 * Networking
 	* [Internet Gateway](#internet-gateway)
 	* [NAT Gateway](#nat-gateway)
@@ -89,6 +92,38 @@ This module creates an [AWS ELB HTTPS](https://www.terraform.io/docs/providers/a
 | dns_name | The DNS name of the ELB |
 | id | The id of the ELB |
 | name | The name of the ELB |
+
+## Rancheros AMI
+
+
+## Inputs
+
+| Name | Description | Default | Required |
+|------|-------------|:-----:|:-----:|
+| owners | Rancher Labs owner id | `<list>` | no |
+| version | RancherOS version to be installed | `1.0.1` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| id | AMI id |
+
+## Ubuntu AMI
+
+
+## Inputs
+
+| Name | Description | Default | Required |
+|------|-------------|:-----:|:-----:|
+| distribution | Ubuntu distribution to be installed | `trusty` | no |
+| owners | Canonical Group Limited owner id | `<list>` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| id | AMI id |
 
 ## Internet Gateway
 
