@@ -1,3 +1,7 @@
+/**
+ * This data module will return an [RancherOS](https://github.com/rancher/os) [AWS AMI ID](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) to populate the [ami](https://www.terraform.io/docs/providers/aws/r/instance.html#ami) argument to our instance
+ */
+
 variable "version" {
     default = "1.0.1"
     description = "RancherOS version to be installed"

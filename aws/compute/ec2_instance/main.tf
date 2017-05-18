@@ -115,8 +115,8 @@ output "ids" { value = [ "${aws_instance.mod.*.id}" ] }
 // The name for the key pair
 output "key_name" { value = "${aws_key_pair.mod.key_name}"}
 
-// Private IP addresses to associate with the instances in a VPC
+// Private IPs address to associate with the instance in a VPC
 output "private_ips" { value = ["${aws_instance.mod.*.private_ip}"] }
 
-// The public IP addresses assigned to the instances
+// The public IP address assigned to the instance
 output "public_ips"  { value = ["${aws_instance.mod.*.public_ip}"] }
