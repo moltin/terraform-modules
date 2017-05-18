@@ -1,6 +1,8 @@
 .PHONY: docs
 docs: ## terraform docs
-	@bin/docs
+	@bin/docs \
+	\
+	$(MAKE) changelog
 
 .PHONY: changelog
 changelog: ## generate changelog
