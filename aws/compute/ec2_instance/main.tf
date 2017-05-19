@@ -97,7 +97,13 @@ resource "aws_instance" "mod" {
         delete_on_termination = "${var.delete_on_termination}"
     }
 
-    depends_on =["aws_key_pair.mod"]
+    lifecycle {
+        create_before_destroy = true
+    }
+
+    depends_on = [
+        "aws_key_pair.mod"
+    ]
 
     tags = "${merge(var.tags, map("Name", format("%s-ec2-instance-%03d", var.name, count.index)), map("Terraform", "true"))}"
 }
