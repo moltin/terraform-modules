@@ -1,6 +1,13 @@
 # Changelog
 
 
+## 0.1.12 (2017-05-19)
+
+### New
+
+* Add lifecycle create_before_destroy on ec2 instances. [Israel Sotomayor]
+
+
 ## 0.1.11 (2017-05-19)
 
 ### Changes
