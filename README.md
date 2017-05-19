@@ -182,7 +182,24 @@ One NAT gateway should be created per supplied public subnet ID. This ensures th
 
 ## Private Subnet
 
-This modules create an [AWS Private Subnet](https://www.terraform.io/docs/providers/aws/r/subnet.html) and an [AWS NAT Gateway](https://www.terraform.io/docs/providers/aws/r/nat_gateway.html) if specified
+This modules creates:
+
+- [AWS Private Subnet](https://www.terraform.io/docs/providers/aws/r/subnet.html)
+- [AWS NAT Gateway](https://www.terraform.io/docs/providers/aws/r/nat_gateway.html) if specified
+
+Usage:
+
+```hcl
+module "private_subnet" {
+    source = "github.com/moltin/terraform-modules.git/aws//networking/private_subnet"
+}
+```
+
+> Note: if not using SSH authentication URL, it's important to notice that
+there is a dependency with the `nat_gateway` that needs to be satisfied
+therefore we need to import the `private_subnet` from the `networking`
+subfolder as shown in the example above using `//` like
+`aws//networking/private_subnet`
 
 
 ## Inputs
