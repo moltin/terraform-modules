@@ -1,6 +1,17 @@
 # Changelog
 
 
+## 0.1.11 (2017-05-19)
+
+### Changes
+
+* Use relative path will fix pulling wrong version. [Israel Sotomayor]
+
+### Fix
+
+* Changelog generation. [Israel Sotomayor]
+
+
 ## 0.1.10 (2017-05-19)
 
 ### Changes
