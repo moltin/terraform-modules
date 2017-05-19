@@ -1,5 +1,22 @@
 /**
- * This modules create an [AWS Private Subnet](https://www.terraform.io/docs/providers/aws/r/subnet.html) and an [AWS NAT Gateway](https://www.terraform.io/docs/providers/aws/r/nat_gateway.html) if specified
+ * This modules creates:
+ *
+ * - [AWS Private Subnet](https://www.terraform.io/docs/providers/aws/r/subnet.html)
+ * - [AWS NAT Gateway](https://www.terraform.io/docs/providers/aws/r/nat_gateway.html) if specified
+ *
+ * Usage:
+ *
+ * ```hcl
+ * module "private_subnet" {
+ *     source = "github.com/moltin/terraform-modules.git/aws//networking/private_subnet"
+ * }
+ * ```
+ *
+ * > Note: if not using SSH authentication URL, it's important to notice that
+ * there is a dependency with the `nat_gateway` that needs to be satisfied
+ * therefore we need to import the `private_subnet` from the `networking`
+ * subfolder as shown in the example above using `//` like
+ * `aws//networking/private_subnet`
  */
 
 variable "availability_zones" {
@@ -46,7 +63,7 @@ variable "vpc_id" {
 }
 
 module "nat_gateway" {
-    source = "github.com/moltin/terraform-modules/aws/networking/nat_gateway"
+    source = "../nat_gateway"
 
     route_table_ids    = ["${aws_route_table.mod.*.id}"]
     nat_gateway_count  = "${var.nat_gateway_count}"
