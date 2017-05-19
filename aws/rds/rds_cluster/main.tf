@@ -68,11 +68,11 @@ resource "aws_rds_cluster" "mod" {
     preferred_maintenance_window = "${var.preferred_maintenance_window}"
 }
 
-// The database port
-output "port" { value = "${aws_rds_cluster.mod.port}" }
+// The RDS Cluster Identifier
+output "cluster_identifier" { value = "${aws_rds_cluster.mod.cluster_identifier}" }
 
 // The DNS address of the RDS instance
 output "endpoint" { value = "${aws_rds_cluster.mod.endpoint}" }
 
-// The RDS Cluster Identifier
-output "cluster_identifier" { value = "${aws_rds_cluster.mod.cluster_identifier}" }
+// The database port
+output "port" { value = "${aws_rds_cluster.mod.port}" }

@@ -72,8 +72,8 @@ This module creates:
 |------|-------------|
 | ids | A list of instance IDs |
 | key_name | The name for the key pair |
-| private_ips | Private IP addresses to associate with the instances in a VPC |
-| public_ips | The public IP addresses assigned to the instances |
+| private_ips | Private IPs address to associate with the instance in a VPC |
+| public_ips | The public IP address assigned to the instance |
 
 ## ELB HTTPS
 
@@ -103,6 +103,8 @@ This module creates an [AWS ELB HTTPS](https://www.terraform.io/docs/providers/a
 
 ## Rancheros AMI
 
+This data module will return an [RancherOS](https://github.com/rancher/os) [AWS AMI ID](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) to populate the [ami](https://www.terraform.io/docs/providers/aws/r/instance.html#ami) argument to our instance
+
 
 ## Inputs
 
@@ -118,6 +120,10 @@ This module creates an [AWS ELB HTTPS](https://www.terraform.io/docs/providers/a
 | id | AMI id |
 
 ## Ubuntu AMI
+
+This data module will return an [Ubuntu](https://www.ubuntu.com/) [AWS AMI ID](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) to populate the [ami](https://www.terraform.io/docs/providers/aws/r/instance.html#ami) argument to our instances
+
+> Note: If you are using our [AWS EC2 Instance module](https://github.com/moltin/terraform-modules/blob/master/README.md#ec2-instance) it will try to recreate a new resource every time as the `aws_ami` could change if a new version is publish, as this one will have a different timestamp even if we are specifying the same architecture, distribution or virtualization type, so or either you use your own `aws_instance` resource add the [the ignore_changes lifecycle argument](https://www.terraform.io/docs/configuration/resources.html#ignore_changes) to not recreate the instance again and then `terraform taint` the instance to force recreate when you want to change to a new AMI for more info see the following Terraform [issue](https://github.com/hashicorp/terraform/issues/13044#issuecomment-289046234)
 
 
 ## Inputs
@@ -387,12 +393,16 @@ This modules create an [AWS RDS Cluster](https://www.terraform.io/docs/providers
 
 | Name | Description | Default | Required |
 |------|-------------|:-----:|:-----:|
+| backup_retention_period | The backup retention period | - | yes |
 | database_name | The name for your database of up to 8 alpha-numeric characters. If you do not provide a name, Amazon RDS will not create a database in the DB cluster you are creating | - | yes |
 | db_subnet_group_name | A DB subnet group to associate with this DB instance. NOTE: This must match the db_subnet_group_name specified on every aws_rds_cluster_instance in the cluster | - | yes |
+| final_snapshot_identifier | The name of your final DB snapshot when this DB cluster is deleted. If omitted, no final snapshot will be made | - | yes |
 | master_password | Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file | - | yes |
 | master_username | Username for the master DB user | - | yes |
 | name | The RDS DB subnet group name | - | yes |
 | port | The port on which the DB accepts connections | `3306` | no |
+| preferred_backup_window | The time window on which backups will be made (HH:mm-HH:mm) | - | yes |
+| preferred_maintenance_window | The weekly time range during which system maintenance can occur, in (UTC) e.g. wed:04:00-wed:04:30 | - | yes |
 | skip_final_snapshot | Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted, using the value from final_snapshot_identifier | `false` | no |
 | vpc_security_group_ids | List of VPC security groups to associate with the Cluster | - | yes |
 
