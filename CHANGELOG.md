@@ -1,6 +1,39 @@
 # Changelog
 
 
+## 0.1.10 (2017-05-19)
+
+### Changes
+
+* Add backup and maintenance options. [Israel Sotomayor]
+
+
+## 0.1.9 (2017-05-18)
+
+### Fix
+
+* Forgotten spaces on Makefile. [Israel Sotomayor]
+
+* Editorconfig file. [Israel Sotomayor]
+
+
+## 0.1.8 (2017-05-17)
+
+### New
+
+* Add editorconfig support. [Israel Sotomayor]
+
+* Add changeglog support. [Israel Sotomayor]
+
+### Changes
+
+* Improve documentation. [Israel Sotomayor]
+
+### Fix
+
+* Errors with outputs for ec2 instances. [Israel Sotomayor]
+
+
 ## 0.1.7 (2017-05-17)
 
 ### New
