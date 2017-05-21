@@ -1,6 +1,13 @@
 # Changelog
 
 
+## 0.1.13 (2017-05-21)
+
+### Fix
+
+* Support websocket adding a proxy protocol over tcp. [Israel Sotomayor]
+
+
 ## 0.1.12 (2017-05-19)
 
 ### New
