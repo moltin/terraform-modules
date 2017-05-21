@@ -45,9 +45,9 @@ resource "aws_elb" "mod" {
 
     listener {
         instance_port      = "${var.listener_instance_port}"
-        instance_protocol  = "http"
+        instance_protocol  = "tcp"
         lb_port            = 443
-        lb_protocol        = "https"
+        lb_protocol        = "ssl"
         ssl_certificate_id = "${var.ssl_certificate_id}"
     }
 
@@ -69,6 +69,11 @@ resource "aws_elb" "mod" {
     connection_draining_timeout = 400
 
     tags = "${merge(var.tags, map("Name", format("%s-elb-https-public", var.name)), map("Terraform", "true"))}"
+}
+
+resource "aws_proxy_protocol_policy" "mod" {
+    load_balancer  = "${aws_elb.mod.name}"
+    instance_ports = ["443", "${var.listener_instance_port}"]
 }
 
 // The id of the ELB
