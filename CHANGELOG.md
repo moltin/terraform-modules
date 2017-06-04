@@ -1,6 +1,19 @@
 # Changelog
 
 
+## 0.1.14 (2017-06-04)
+
+### New
+
+* Custom aws_security_group to add rules to. [Israel Sotomayor]
+
+  This aws_security_group will give us the base to build upon our own security rules rules
+
+### Fix
+
+* Editorconfig identify Makefile type. [Israel Sotomayor]
+
+
 ## 0.1.13 (2017-05-21)
 
 ### Fix
