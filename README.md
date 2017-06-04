@@ -27,6 +27,7 @@ This project has been highly inspired by the work of others that have decided to
 	* [NAT Gateway](#nat-gateway)
 	* [Private Subnet](#private-subnet)
 	* [Public Subnet](#public-subnet)
+	* [Security Group - Custom Group](#security-group---custom-group)
 	* [Security Group - ELB HTTPS](#security-group---elb-https)
 	* [Security Group - Internal](#security-group---internal)
 	* [Security Group - Rancher](#security-group---rancher)
@@ -245,6 +246,55 @@ This modules create an [AWS Public Subnet](https://www.terraform.io/docs/provide
 |------|-------------|
 | ids | A list of public subnet IDs |
 | route_table_ids | A list of public route table IDs |
+
+## Security Group - Custom Group
+
+This modules create an [AWS Security Group](https://www.terraform.io/docs/providers/aws/d/security_group.html) without rules to be customized
+
+You will need to add custom rules to your security group
+
+Usage:
+```hcl
+module "sg_custom_elb_https" {
+    source = "git::ssh://git@github.com/moltin/terraform-modules.git//aws/networking/security_group/sg_custom_group"
+
+    name     = "${var.name}"
+    vpc_id   = "${data.terraform_remote_state.network.vpc_id}"
+    resource_name = "elb-https"
+
+    tags {
+        "Cluster"     = "security"
+        "Audience"    = "private"
+        "Environment" = "${var.environment}"
+    }
+}
+
+resource "aws_security_group_rule" "authentication" {
+    type            = "ingress"
+    from_port       = 8000
+    to_port         = 8000
+    protocol        = "tcp"
+    cidr_blocks     = ["${var.vpc_cidr}"]
+
+    security_group_id = "${module.sg_custom.id}"
+}
+```
+
+
+## Inputs
+
+| Name | Description | Default | Required |
+|------|-------------|:-----:|:-----:|
+| name | The security group name, will follow the format [name]-sg-custom-[resource_name], e.g. moltin-sg-custom-elb-https | - | yes |
+| resource_name | Resource name security group will be apply to, this will be combine with the variable `name` and follow the format [name]-sg-custom-[resource_name], e.g. moltin-sg-custom-elb-https | - | yes |
+| tags | A map of tags to assign to the resource, `Name` and `Terraform` will be added by default | `<map>` | no |
+| vpc_id | The id of the VPC that the desired subnet belongs to | - | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| id | The id of the specific security group to retrieve |
 
 ## Security Group - ELB HTTPS
 
