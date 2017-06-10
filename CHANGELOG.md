@@ -1,6 +1,19 @@
 # Changelog
 
 
+## 0.2.0 (2017-06-10)
+
+### Changes
+
+* Sg/rancher self rules + inject cidr blocks sg/ssh. [Israel Sotomayor]
+
+  As a minor change default vault for tag have been removed as that value it’s being populated when merging var.tag with the generated tag value that container the name + `Terraform = true`
+
+* Custom security group more flexible. [Israel Sotomayor]
+
+* Remove security groups self ingress rules. [Israel Sotomayor]
+
+
 ## 0.1.14 (2017-06-04)
 
 ### New

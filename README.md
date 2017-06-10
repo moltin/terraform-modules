@@ -254,13 +254,13 @@ This modules create an [AWS Security Group](https://www.terraform.io/docs/provid
 You will need to add custom rules to your security group
 
 Usage:
+
 ```hcl
 module "sg_custom_elb_https" {
     source = "git::ssh://git@github.com/moltin/terraform-modules.git//aws/networking/security_group/sg_custom_group"
 
     name     = "${var.name}"
     vpc_id   = "${data.terraform_remote_state.network.vpc_id}"
-    resource_name = "elb-https"
 
     tags {
         "Cluster"     = "security"
@@ -285,8 +285,8 @@ resource "aws_security_group_rule" "authentication" {
 
 | Name | Description | Default | Required |
 |------|-------------|:-----:|:-----:|
-| name | The security group name, will follow the format [name]-sg-custom-[resource_name], e.g. moltin-sg-custom-elb-https | - | yes |
-| resource_name | Resource name security group will be apply to, this will be combine with the variable `name` and follow the format [name]-sg-custom-[resource_name], e.g. moltin-sg-custom-elb-https | - | yes |
+| description | Description of the security group | `Custom security group` | no |
+| name | The security group name, suggested name format [project_name]-sg-[scope_name][-resource_name], e.g. moltin-sg-membership-elb | - | yes |
 | tags | A map of tags to assign to the resource, `Name` and `Terraform` will be added by default | `<map>` | no |
 | vpc_id | The id of the VPC that the desired subnet belongs to | - | yes |
 
@@ -341,12 +341,12 @@ This modules create an [AWS Security Group](https://www.terraform.io/docs/provid
 
 ## Security Group - Rancher
 
-This modules create an [AWS Security Group](https://www.terraform.io/docs/providers/aws/d/security_group.html) for the Rancher HA server
+This modules create an [AWS Security Group](https://www.terraform.io/docs/providers/aws/d/security_group.html) for the internal communication between Rancher HA server nodes
 
 Ports:
 
-- TCP 8080 (Rancher HA server nodes)
-- TCP 9345 (Rancher HA server nodes)
+- TCP 8080 / self (Rancher HA server nodes)
+- TCP 9345 / self (Rancher HA server nodes)
 
 
 ## Inputs
@@ -355,7 +355,6 @@ Ports:
 |------|-------------|:-----:|:-----:|
 | name | The security group name, will follow the format [name]-sg-rancher-ha-server-[03d], e.g. moltin-sg-rancher-ha-server-001 | - | yes |
 | tags | A map of tags to assign to the resource, `Name` and `Terraform` will be added by default | `<map>` | no |
-| vpc_cidr | VPC CIDR block | - | yes |
 | vpc_id | The id of the VPC that the desired subnet belongs to | - | yes |
 
 ## Outputs
@@ -375,7 +374,7 @@ This modules create an [AWS Security Group](https://www.terraform.io/docs/provid
 |------|-------------|:-----:|:-----:|
 | ingress_allow_security_groups | List of security group Group Names if using EC2-Classic, or Group IDs if using a VPC | - | yes |
 | name | The security group name, will follow the format [name]-sg-rds-cluster-instance-[03d], e.g. moltin-rds-cluster-instance-001 | - | yes |
-| port | Port number to open for the Aurora Database flavour we pick up, e.g. MySQL 3306 | - | yes |
+| port | Port number to open for the Aurora Database flavour we pick up, e.g. MySQL 3306 | `3306` | no |
 | tags | A map of tags to assign to the resource, `Name` and `Terraform` will be added by default | `<map>` | no |
 | vpc_id | The id of the VPC that the desired subnet belongs to | - | yes |
 
@@ -398,9 +397,9 @@ Ports:
 
 | Name | Description | Default | Required |
 |------|-------------|:-----:|:-----:|
+| ingress_cidr_blocks | A list of ingress CIDR blocks | `<list>` | no |
 | name | The security group name, will follow the format [name]-sg-ssh-[03d], e.g. moltin-sg-ssh-001 | - | yes |
 | tags | A map of tags to assign to the resource, `Name` and `Terraform` will be added by default | `<map>` | no |
-| vpc_cidr | VPC CIDR block | - | yes |
 | vpc_id | The id of the VPC that the desired subnet belongs to | - | yes |
 
 ## Outputs
