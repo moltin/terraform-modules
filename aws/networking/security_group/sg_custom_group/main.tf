@@ -4,13 +4,13 @@
  * You will need to add custom rules to your security group
  *
  * Usage:
+ *
  * ```hcl
  * module "sg_custom_elb_https" {
  *     source = "git::ssh://git@github.com/moltin/terraform-modules.git//aws/networking/security_group/sg_custom_group"
  *
  *     name     = "${var.name}"
  *     vpc_id   = "${data.terraform_remote_state.network.vpc_id}"
- *     resource_name = "elb-https"
  *
  *     tags {
  *         "Cluster"     = "security"
@@ -31,16 +31,17 @@
  * ```
  */
 
-variable "name" {
-    description = "The security group name, will follow the format [name]-sg-custom-[resource_name], e.g. moltin-sg-custom-elb-https"
+variable "description" {
+    default = "Custom security group"
+    description = "Description of the security group"
 }
 
-variable "resource_name" {
-    description = "Resource name security group will be apply to, this will be combine with the variable `name` and follow the format [name]-sg-custom-[resource_name], e.g. moltin-sg-custom-elb-https"
+variable "name" {
+    description = "The security group name, suggested name format [project_name]-sg-[scope_name][-resource_name], e.g. moltin-sg-membership-elb"
 }
 
 variable "tags" {
-    default = { Terraform = true }
+    default = {}
     description = "A map of tags to assign to the resource, `Name` and `Terraform` will be added by default"
 }
 
@@ -49,11 +50,11 @@ variable "vpc_id" {
 }
 
 resource "aws_security_group" "mod" {
-    name        = "${var.name}-sg-custom-${var.resource_name}"
+    name        = "${var.name}"
     vpc_id      = "${var.vpc_id}"
-    description = "Custom security group"
+    description = "${var.description}"
 
-    tags = "${merge(var.tags, map("Name", format("%s-sg-custom-%s", var.name, var.resource_name)), map("Terraform", "true"))}"
+    tags = "${merge(var.tags, map("Name", format("%s", var.name)), map("Terraform", "true"))}"
 }
 
 // The id of the specific security group to retrieve
