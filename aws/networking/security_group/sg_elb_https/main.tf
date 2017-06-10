@@ -12,7 +12,7 @@ variable "name" {
 }
 
 variable "tags" {
-    default = { Terraform = true }
+    default = {}
     description = "A map of tags to assign to the resource, `Name` and `Terraform` will be added by default"
 }
 
@@ -23,7 +23,7 @@ variable "vpc_id" {
 resource "aws_security_group" "mod" {
     name        = "${var.name}-sg-elb-https"
     vpc_id      = "${var.vpc_id}"
-    description = "Elastic Load Balancer security group"
+    description = "Elastic Load Balancer HTTPS security group"
 
     ingress {
         from_port   = 443

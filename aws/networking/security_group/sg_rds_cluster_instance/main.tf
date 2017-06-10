@@ -12,11 +12,12 @@ variable "name" {
 }
 
 variable "port" {
-  description = "Port number to open for the Aurora Database flavour we pick up, e.g. MySQL 3306"
+    default = 3306
+    description = "Port number to open for the Aurora Database flavour we pick up, e.g. MySQL 3306"
 }
 
 variable "tags" {
-    default = { Terraform = true }
+    default = {}
     description = "A map of tags to assign to the resource, `Name` and `Terraform` will be added by default"
 }
 

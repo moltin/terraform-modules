@@ -1,10 +1,10 @@
 /**
- * This modules create an [AWS Security Group](https://www.terraform.io/docs/providers/aws/d/security_group.html) for the Rancher HA server
+ * This modules create an [AWS Security Group](https://www.terraform.io/docs/providers/aws/d/security_group.html) for the internal communication between Rancher HA server nodes
  *
  * Ports:
  *
- * - TCP 8080 (Rancher HA server nodes)
- * - TCP 9345 (Rancher HA server nodes)
+ * - TCP 8080 / self (Rancher HA server nodes)
+ * - TCP 9345 / self (Rancher HA server nodes)
  */
 
 variable "name" {
@@ -12,12 +12,8 @@ variable "name" {
 }
 
 variable "tags" {
-    default = { Terraform = true }
+    default = {}
     description = "A map of tags to assign to the resource, `Name` and `Terraform` will be added by default"
-}
-
-variable "vpc_cidr" {
-    description = "VPC CIDR block"
 }
 
 variable "vpc_id" {
@@ -33,14 +29,14 @@ resource "aws_security_group" "mod" {
         from_port   = 8080
         to_port     = 8080
         protocol    = "tcp"
-        cidr_blocks = ["${var.vpc_cidr}"]
+        self        = true
     }
 
     ingress {
         from_port   = 9345
         to_port     = 9345
         protocol    = "tcp"
-        cidr_blocks = ["${var.vpc_cidr}"]
+        self        = true
     }
 
     egress {

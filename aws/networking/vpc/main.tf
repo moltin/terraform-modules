@@ -7,13 +7,13 @@ variable "cidr" {
 }
 
 variable "enable_dns_hostnames" {
-    description = "A boolean flag to enable/disable DNS hostnames in the VPC"
     default = false
+    description = "A boolean flag to enable/disable DNS hostnames in the VPC"
 }
 
 variable "enable_dns_support" {
-    description = "A boolean flag to enable/disable DNS support in the VPC"
     default = false
+    description = "A boolean flag to enable/disable DNS support in the VPC"
 }
 
 variable "name" {
@@ -21,7 +21,7 @@ variable "name" {
 }
 
 variable "tags" {
-    default = { Terraform = true }
+    default = {}
     description = "A map of tags to assign to the resource, `Name` and `Terraform` will be added by default"
 }
 

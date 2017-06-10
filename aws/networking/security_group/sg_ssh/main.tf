@@ -11,12 +11,14 @@ variable "name" {
 }
 
 variable "tags" {
-    default = { Terraform = true }
+    default = {}
     description = "A map of tags to assign to the resource, `Name` and `Terraform` will be added by default"
 }
 
-variable "vpc_cidr" {
-    description = "VPC CIDR block"
+variable "ingress_cidr_blocks" {
+    type = "list"
+    default = ["0.0.0.0/0"]
+    description = "A list of ingress CIDR blocks"
 }
 
 variable "vpc_id" {
@@ -32,7 +34,7 @@ resource "aws_security_group" "mod" {
         from_port   = 22
         to_port     = 22
         protocol    = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
+        cidr_blocks = "${var.ingress_cidr_blocks}"
     }
 
     egress {

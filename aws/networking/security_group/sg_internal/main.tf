@@ -7,7 +7,7 @@ variable "name" {
 }
 
 variable "tags" {
-    default = { Terraform = true }
+    default = {}
     description = "A map of tags to assign to the resource, `Name` and `Terraform` will be added by default"
 }
 
@@ -20,7 +20,7 @@ resource "aws_security_group" "mod" {
     vpc_id      = "${var.vpc_id}"
     description = "Internal comms for resources that share this sg"
 
-    # allow all self on all protocols - give access to any other instance that have assigned the same sg
+    # allow all self on all protocols - give access to any other instance that share this sg
     ingress {
         from_port = 0
         to_port   = 0
