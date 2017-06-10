@@ -29,19 +29,11 @@ resource "aws_security_group" "mod" {
     vpc_id      = "${var.vpc_id}"
     description = "RDS Cluster instance ports"
 
-    # allow all self on all protocols - give access to any other instance that have assigned the same sg
     ingress {
-        from_port = 0
-        to_port   = 0
-        protocol  = "-1"
-        self      = true
-    }
-
-    ingress {
-      from_port       = "${var.port}"
-      to_port         = "${var.port}"
-      protocol        = "tcp"
-      security_groups = ["${var.ingress_allow_security_groups}"]
+        from_port       = "${var.port}"
+        to_port         = "${var.port}"
+        protocol        = "tcp"
+        security_groups = ["${var.ingress_allow_security_groups}"]
     }
 
     egress {

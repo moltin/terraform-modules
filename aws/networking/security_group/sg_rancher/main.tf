@@ -29,14 +29,6 @@ resource "aws_security_group" "mod" {
     vpc_id      = "${var.vpc_id}"
     description = "Rancher HA server security group"
 
-    # allow all self on all protocols - give access to any other instance that have assigned the same sg
-    ingress {
-        from_port = 0
-        to_port   = 0
-        protocol  = "-1"
-        self      = true
-    }
-
     ingress {
         from_port   = 8080
         to_port     = 8080
