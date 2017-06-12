@@ -84,3 +84,6 @@ output "name" { value = "${aws_elb.mod.name}" }
 
 // The DNS name of the ELB
 output "dns_name" { value = "${aws_elb.mod.dns_name}" }
+
+// The canonical hosted zone ID of the ELB (to be used in a Route 53 Alias record)
+output "zone_id" { value = "${aws_elb.mod.zone_id}"}
