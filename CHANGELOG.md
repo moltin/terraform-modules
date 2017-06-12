@@ -1,6 +1,13 @@
 # Changelog
 
 
+## 0.2.1 (2017-06-12)
+
+### New
+
+* Output elb zone id. [Israel Sotomayor]
+
+
 ## 0.2.0 (2017-06-10)
 
 ### Changes

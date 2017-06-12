@@ -101,6 +101,7 @@ This module creates an [AWS ELB HTTPS](https://www.terraform.io/docs/providers/a
 | dns_name | The DNS name of the ELB |
 | id | The id of the ELB |
 | name | The name of the ELB |
+| zone_id | The canonical hosted zone ID of the ELB (to be used in a Route 53 Alias record) |
 
 ## Rancheros AMI
 
