@@ -32,13 +32,13 @@ resource "aws_route" "mod" {
 }
 
 resource "aws_nat_gateway" "mod" {
-    count         = "${var.nat_gateway_count}"
+    count         = "${length(var.private_subnet_ids) > 0 ? var.nat_gateway_count : 0}"
     subnet_id     = "${element(var.public_subnet_ids, count.index)}"
     allocation_id = "${element(aws_eip.mod.*.id, count.index)}"
 }
 
 resource "aws_eip" "mod" {
-    count = "${var.nat_gateway_count}"
+    count = "${length(var.private_subnet_ids) > 0 ? var.nat_gateway_count : 0}"
     vpc   = true
 }
 
