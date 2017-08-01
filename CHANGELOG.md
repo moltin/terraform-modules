@@ -1,6 +1,15 @@
 # Changelog
 
 
+## 0.2.2 (2017-08-01)
+
+### Fix
+
+* Don't create NAT resource if not private subnet. [Israel Sotomayor]
+
+  We check for the length of the private_subnet_ids to create NAT resources, this is needed as we can't control the count vault on modules https://github.com/hashicorp/terraform/issues/953#issuecomment-311143908
+
+
 ## 0.2.1 (2017-06-12)
 
 ### New
